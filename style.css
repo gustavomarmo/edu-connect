@@ -8,8 +8,8 @@
     --border-color: #34495e;    /* Cor das bordas internas */
     
     /* Cores dos ícones de tema */
-    --icon-inactive: #343347;   /* Cinza para ícone inativo */
-    --icon-active: #ced8e2;     /* Cor do ícone ativo (escuro no modo claro) */
+    --icon-inactive: #a0a0a0;   /* Cinza para ícone inativo */
+    --icon-active: #2c3e50;     /* Cor do ícone ativo (escuro no modo claro) */
 }
 
 /* --- 2. Definição do Modo Escuro --- */
@@ -53,6 +53,8 @@ body {
     overflow: hidden; 
     display: flex;
     flex-direction: column;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
 
     /* 3. Usando as variáveis e adicionando transição */
     background-color: var(--bg-secondary);
@@ -73,6 +75,7 @@ body {
     font-size: 1.5rem;
     cursor: pointer;
     color: var(--text-secondary); /* 3. Usando variável */
+    padding: 10px;
 }
 
 /* Perfil do Usuário */
@@ -113,11 +116,10 @@ body {
     
     /* 3. Usando as variáveis e adicionando transição */
     color: var(--text-secondary);
-    transition: background-color 0.2s;
+    transition: background-color 1s;
 }
 
-.nav-links li a:hover,
-.logout-section a:hover {
+.nav-links li a:hover {
     background-color: var(--bg-hover); /* 3. Usando variável */
 }
 
@@ -133,6 +135,7 @@ body {
 /* Seção de Logout */
 .logout-section {
     border-top: 1px solid var(--border-color); /* 3. Usando variável */
+    padding: 10px;
 }
 
 /* --- Estilos do Conteúdo Principal --- */
@@ -146,6 +149,7 @@ body {
 }
 
 /* --- ESTADO RECOLHIDO (Collapsed) --- */
+/* (Nenhuma mudança de cor aqui, apenas de layout) */
 .sidebar.collapsed {
     width: 80px; 
 }
@@ -189,7 +193,7 @@ body {
     
     /* Cor do ícone inativo */
     color: var(--icon-inactive); 
-    transition: color 0.3s ease, background-color 0.3s ease;
+    transition: color 1s ease, background-color 1s ease;
 }
 
 .theme-btn.active {

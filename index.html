@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema Escolar</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="src/css/style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -24,31 +24,31 @@
 
         <ul class="nav-links">
             <li>
-                <a href="#">
+                <a href="pages/dashboard.html" class="nav-link" id="dashboard">
                     <i class="fa-solid fa-house"></i>
                     <span class="link-text">Dashboard</span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="pages/calendario.html" class="nav-link">
                     <i class="fa-solid fa-calendar"></i>
                     <span class="link-text">Calendário</span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="pages/alunos.html" class="nav-link">
                     <i class="fa-solid fa-person"></i>
                     <span class="link-text">Alunos</span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="pages/professores.html" class="nav-link">
                     <i class="fa-solid fa-person-chalkboard"></i>
                     <span class="link-text">Professores</span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="pages/desempenho.html" class="nav-link">
                     <i class="fa-solid fa-chart-simple"></i>
                     <span class="link-text">Desempenho</span>
                 </a>
@@ -63,7 +63,7 @@
         </div>
     </nav>
 
-    <main class="main-content">
+    <main class="main-content" id="main-content">
         
         <div class="theme-switcher">
             <button id="theme-sun" class="theme-btn active">
@@ -74,10 +74,10 @@
             </button>
         </div>
 
-        <h1>Dashboard Principal</h1>
-        <p>O conteúdo da sua página ficará aqui...</p>
+        <div id="page-content"></div>
+
     </main>
 
-    <script src="src/js/script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
