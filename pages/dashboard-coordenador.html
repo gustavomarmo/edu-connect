@@ -1,0 +1,43 @@
+<div class="dashboard-grid-coord">
+
+    <div class="coord-col-main">
+        <div class="dashboard-widget widget-opcoes">
+            <h2>Acesso Rápido</h2>
+            <div class="opcoes-grid">
+                <a href="pages/calendario.html" class="nav-link opcao-item"> <i class="fa-solid fa-calendar"></i> <span>Calendário</span> </a>
+                <a href="pages/alunos.html" class="nav-link opcao-item"> <i class="fa-solid fa-person"></i> <span>Alunos</span> </a>
+                <a href="pages/professores.html" class="nav-link opcao-item"> <i class="fa-solid fa-person-chalkboard"></i> <span>Professores</span> </a>
+                <a href="pages/relatorios.html" class="nav-link opcao-item"> <i class="fa-solid fa-file-invoice"></i> <span>Relatórios</span> </a>
+                <a href="pages/comunicados.html" class="nav-link opcao-item"> <i class="fa-solid fa-bullhorn"></i> <span>Comunicados</span> </a>
+                <a href="pages/config.html" class="nav-link opcao-item"> <i class="fa-solid fa-gear"></i> <span>Configurações</span> </a>
+            </div>
+        </div>
+
+        <div class="dashboard-widget widget-bar-chart">
+            <h2>Desempenho da Escola (Média por Matéria)</h2>
+            <div class="chart-container"> <canvas id="coordBarChart"></canvas> </div>
+        </div>
+    </div>
+
+    <div class="coord-col-side">
+        <div class="dashboard-widget widget-kpis-coord">
+            <h2>A Escola em Números</h2>
+            <div class="kpi-item"> <i class="fa-solid fa-person"></i> <div class="kpi-text"> <span class="kpi-value" id="kpi-total-alunos">--</span> <span class="kpi-label">Total de Alunos</span> </div> </div>
+            <div class="kpi-item"> <i class="fa-solid fa-person-chalkboard"></i> <div class="kpi-text"> <span class="kpi-value" id="kpi-total-prof">--</span> <span class="kpi-label">Total de Professores</span> </div> </div>
+            <div class="kpi-item"> <i class="fa-solid fa-star"></i> <div class="kpi-text"> <span class="kpi-value" id="kpi-media-escola">--</span> <span class="kpi-label">Média Geral da Escola</span> </div> </div>
+            <div class="kpi-item"> <i class="fa-solid fa-calendar-check"></i> <div class="kpi-text"> <span class="kpi-value" id="kpi-eventos-prox">--</span> <span class="kpi-label">Eventos (Próx. 7 dias)</span> </div> </div>
+        </div>
+
+        <div class="dashboard-widget widget-pie-chart">
+            <h2>Alunos por Turma</h2>
+            <div class="chart-container-pie"> <canvas id="coordPieChart"></canvas> </div>
+        </div>
+
+        <div class="dashboard-widget widget-proximos-eventos">
+            <h2>Próximos Eventos (7 dias)</h2>
+            <ul class="eventos-list-coord" id="proximos-eventos-coord-list">
+                </ul>
+        </div>
+
+    </div>
+</div>

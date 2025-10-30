@@ -4,8 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Edu Connect</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="login.css">
 </head>
 <body>
     
+    <div class="theme-switcher">
+        <button id="theme-sun" class="theme-btn"> <i class="fa-solid fa-sun"></i>
+        </button>
+        <button id="theme-moon" class="theme-btn">
+            <i class="fa-solid fa-moon"></i>
+        </button>
+    </div>
+
+    <div class="login-container">
+        <h1>Edu Connect</h1>
+        <form id="login-form">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" required placeholder="seuemail@exemplo.com">
+            </div>
+            <div class="form-group">
+                <label for="password">Senha</label>
+                <input type="password" id="password" required placeholder="********">
+            </div>
+            <a href="#" class="forgot-password">Esqueci minha senha</a>
+            <div class="role-selector">
+                <label>Eu sou:</label>
+                <div class="role-buttons">
+                    <button type="button" class="role-btn" data-role="aluno"> <i class="fa-solid fa-person"></i> Aluno </button>
+                    <button type="button" class="role-btn" data-role="professor"> <i class="fa-solid fa-person-chalkboard"></i> Professor </button>
+                    <button type="button" class="role-btn" data-role="coordenador"> <i class="fa-solid fa-user-gear"></i> Coord. </button>
+                </div>
+            </div>
+            <div class="error-message" id="error-message"></div>
+            <button type="submit" class="submit-btn">Entrar</button>
+        </form>
+    </div>
+
+    <script src="login.js"></script>
 </body>
 </html>

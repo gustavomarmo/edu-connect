@@ -6,6 +6,9 @@
     <title>Sistema Escolar</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+
+    <!--Biblioteca para Gráficos (Chart.js)-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
@@ -18,36 +21,36 @@
         </header>
 
         <div class="user-profile">
-            <img src="https://via.placeholder.com/40" alt="Foto do Usuário" class="user-photo">
-            <span class="link-text user-name">Nome do Usuário</span>
+            <img src="images/IMG_8792.jpg" alt="Foto do Usuário" class="user-photo">
+            <span class="link-text user-name">Gustavo Marmo</span>
         </div>
 
         <ul class="nav-links">
-            <li>
+            <li id="nav-dashboard">
                 <a href="pages/dashboard.html" class="nav-link" id="dashboard">
                     <i class="fa-solid fa-house"></i>
                     <span class="link-text">Dashboard</span>
                 </a>
             </li>
-            <li>
+            <li id="nav-calendario">
                 <a href="pages/calendario.html" class="nav-link">
                     <i class="fa-solid fa-calendar"></i>
                     <span class="link-text">Calendário</span>
                 </a>
             </li>
-            <li>
+            <li id="nav-alunos">
                 <a href="pages/alunos.html" class="nav-link">
                     <i class="fa-solid fa-person"></i>
                     <span class="link-text">Alunos</span>
                 </a>
             </li>
-            <li>
+            <li id="nav-professores">
                 <a href="pages/professores.html" class="nav-link">
                     <i class="fa-solid fa-person-chalkboard"></i>
                     <span class="link-text">Professores</span>
                 </a>
             </li>
-            <li>
+            <li id="nav-desempenho">
                 <a href="pages/desempenho.html" class="nav-link">
                     <i class="fa-solid fa-chart-simple"></i>
                     <span class="link-text">Desempenho</span>
@@ -56,7 +59,7 @@
         </ul>
 
         <div class="logout-section">
-            <a href="#">
+            <a href="#" id="logout-btn">
                 <i class="fa-solid fa-right-from-bracket"></i>
                 <span class="link-text">Logout</span>
             </a>

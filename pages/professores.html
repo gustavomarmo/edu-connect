@@ -1,2 +1,53 @@
-<h1>Gerenciamento dos professores</h1>
-<p>Aqui você </p>
+<h1>Lista de Professores</h1>
+
+<div class="filter-container">
+    <input type="search" id="teacher-search-input" placeholder="Filtrar por nome, disciplina ou matrícula...">
+    
+    <button id="btn-add-teacher" class="btn-primary">
+        <i class="fa-solid fa-plus"></i> Novo Professor
+    </button>
+</div>
+
+<table class="data-table" id="teacher-table">
+    <thead>
+        <tr>
+            <th>Matrícula</th>
+            <th>Nome</th>
+            <th>Disciplina Principal</th>
+            <th>Status</th>
+            <th class="col-acoes">Ações</th>
+            <th class="col-acoes">Remover</th>
+        </tr>
+    </thead>
+    <tbody id="teacher-table-body">
+        </tbody>
+</table>
+
+<div id="form-novo-professor" class="add-form-widget">
+    <h2>Cadastrar Novo Professor</h2>
+    <form class="form-grid" id="professor-form">
+        <div class="form-group">
+            <label for="prof-matricula">Matrícula</label>
+            <input type="text" id="prof-matricula" required>
+        </div>
+        <div class="form-group">
+            <label for="prof-nome">Nome Completo</label>
+            <input type="text" id="prof-nome" required>
+        </div>
+        <div class="form-group">
+            <label for="prof-disciplina">Disciplina Principal</label>
+            <input type="text" id="prof-disciplina" placeholder="Ex: Matemática" required>
+        </div>
+        <div class="form-group">
+            <label for="prof-status">Status</label>
+            <select id="prof-status" required>
+                <option value="Ativo">Ativo</option>
+                <option value="Inativo">Inativo</option>
+                <option value="Licença">Licença</option>
+            </select>
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn-primary">Salvar Professor</button>
+        </div>
+    </form>
+</div>

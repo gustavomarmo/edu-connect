@@ -1,2 +1,62 @@
-<h1>Análise de Desempenho</h1>
-<p>Aqui você pode analisar seu desempenho na escola</p>
+<div class="performance-grid">
+
+    <div class="dashboard-widget widget-boletim-completo">
+        <h2>Boletim de Notas</h2>
+        <table class="data-table boletim-table">
+            <thead>
+                <tr>
+                    <th rowspan="2">Disciplina</th>
+                    <th colspan="4">1º Bimestre</th> <th colspan="4">2º Bimestre</th> <th rowspan="2">Média Anual</th> </tr>
+                <tr>
+                    <th>N1</th>
+                    <th>N2</th>
+                    <th>Ativ.</th>
+                    <th>Média</th> <th>N1</th>
+                    <th>N2</th>
+                    <th>Ativ.</th>
+                    <th>Média</th> </tr>
+            </thead>
+            <tbody id="boletim-table-body">
+                </tbody>
+        </table>
+    </div>
+
+    <div class="dashboard-widget widget-faltas">
+        <h2>Frequência por Disciplina</h2>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Disciplina</th>
+                    <th>Frequência (%)</th>
+                    <th>Faltas Totais (Ano)</th>
+                </tr>
+            </thead>
+            <tbody id="faltas-table-body">
+                </tbody>
+        </table>
+    </div>
+
+    <div class="dashboard-widget kpi-widget">
+        <h4>Frequência Média</h4>
+        <span class="kpi-value kpi-blue">96%</span>
+        <span class="kpi-detail">Últimos 30 dias</span>
+    </div>
+    <div class="dashboard-widget kpi-widget">
+        <h4>Faltas Totais</h4>
+        <span class="kpi-value kpi-red">14</span>
+        <span class="kpi-detail">No ano letivo</span>
+    </div>
+    
+    <div class="dashboard-widget widget-line-chart">
+        <h2>Evolução das Notas ao longo do ano</h2>
+        <div class="chart-controls">
+            <label for="subject-select">Selecione a Matéria:</label>
+            <select id="subject-select">
+                </select>
+        </div>
+        <div class="chart-container">
+            <canvas id="lineChartEvolucao"></canvas>
+        </div>
+    </div>
+
+    </div>

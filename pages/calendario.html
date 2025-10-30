@@ -1,2 +1,43 @@
-<h1>Calendário Acadêmico</h1>
-<p>Visualize as atividades planejadas</p>
+<div class="calendar-container">
+    
+    <header class="calendar-header">
+        <button class="calendar-nav" id="prev-month">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <h2 id="month-year"></h2> <button class="calendar-nav" id="next-month">
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+    </header>
+
+    <div class="calendar-weekdays">
+        <div>Dom</div>
+        <div>Seg</div>
+        <div>Ter</div>
+        <div>Qua</div>
+        <div>Qui</div>
+        <div>Sex</div>
+        <div>Sáb</div>
+    </div>
+
+    <div class="calendar-grid" id="calendar-days">
+        </div>
+</div>
+
+<div class="modal-overlay" id="event-modal-overlay">
+    <div class="event-modal">
+        <h3>Adicionar Novo Evento</h3>
+        <p>Para o dia: <strong id="modal-date-display"></strong></p>
+        
+        <form id="event-form">
+            <label for="event-title">Título do Evento:</label>
+            <input type="text" id="event-title" placeholder="Ex: Prova de História" required>
+            
+            <input type="hidden" id="event-date">
+            
+            <div class="modal-buttons">
+                <button type="button" id="close-modal">Cancelar</button>
+                <button type="submit" id="save-event">Salvar</button>
+            </div>
+        </form>
+    </div>
+</div>

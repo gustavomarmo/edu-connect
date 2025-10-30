@@ -1,0 +1,67 @@
+<div class="dashboard-grid">
+
+    <div class="dashboard-widget widget-opcoes">
+        <h2>Acesso Rápido</h2>
+        <div class="opcoes-grid">
+            
+            <a href="pages/calendario.html" class="nav-link opcao-item">
+                <i class="fa-solid fa-calendar"></i>
+                <span>Calendário Acadêmico</span>
+            </a>
+            
+            <a href="pages/alunos.html" class="nav-link opcao-item">
+                <i class="fa-solid fa-person"></i>
+                <span>Gerenciar Alunos</span>
+            </a>
+
+            <a href="pages/lancar-notas.html" class="nav-link opcao-item">
+                <i class="fa-solid fa-pen-to-square"></i>
+                <span>Lançar Notas</span>
+            </a>
+            <a href="pages/frequencia.html" class="nav-link opcao-item">
+                <i class="fa-solid fa-list-check"></i>
+                <span>Registrar Frequência</span>
+            </a>
+            <a href="pages/minhas-turmas.html" class="nav-link opcao-item">
+                <i class="fa-solid fa-chalkboard-user"></i>
+                <span>Minhas Turmas</span>
+            </a>
+            <a href="pages/comunicados.html" class="nav-link opcao-item">
+                <i class="fa-solid fa-bullhorn"></i>
+                <span>Comunicados</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="dashboard-widget widget-notas">
+        <h2>Indicadores (História)</h2>
+        <div class="kpi-widget-prof">
+            <h4>Média das Turmas</h4>
+            <span class="kpi-value kpi-blue" id="kpi-media-turma">--</span>
+        </div>
+        <div class="kpi-widget-prof">
+            <h4>Frequência Média</h4>
+            <span class="kpi-value kpi-blue" id="kpi-frequencia-turma">--</span>
+        </div>
+        <div class="kpi-widget-prof">
+            <h4>Alunos em Recuperação</h4>
+            <span class="kpi-value kpi-red" id="kpi-recuperacao-turma">--</span>
+        </div>
+    </div>
+
+    <div class="dashboard-widget widget-noticias">
+        <h2>Alunos que Precisam de Atenção (História)</h2>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Aluno</th>
+                    <th>Turma</th>
+                    <th>Média (História)</th>
+                    <th>Frequência (História)</th>
+                </tr>
+            </thead>
+            <tbody id="atencao-table-body">
+                </tbody>
+        </table>
+    </div>
+</div>

@@ -1,7 +1,52 @@
-<h1>Gerenciamento de Alunos</h1>
-<p>Aqui você poderá cadastrar, editar e remover alunos.</p>
-<form>
-    <label>Nome do Aluno:</label>
-    <input type="text" placeholder="Nome completo...">
-    <button>Adicionar</button>
-</form>
+<h1>Lista de Alunos</h1>
+
+<div class="filter-container">
+    <input type="search" id="student-search-input" placeholder="Filtrar por nome, turma ou matrícula...">
+    
+    <button id="btn-add-student" class="btn-primary">
+        <i class="fa-solid fa-plus"></i> Novo Aluno
+    </button>
+</div>
+
+<table class="data-table" id="student-table">
+    <thead>
+        <tr>
+            <th>Matrícula</th>
+            <th>Nome</th>
+            <th>Turma</th>
+            <th>Status</th>
+            <th class="col-acoes">Ações</th>
+            <th class="col-acoes">Remover</th>
+        </tr>
+    </thead>
+    <tbody id="student-table-body">
+        </tbody>
+</table>
+
+<div id="form-novo-aluno" class="add-form-widget">
+    <h2>Cadastrar Novo Aluno</h2>
+    <form class="form-grid" id="aluno-form">
+        <div class="form-group">
+            <label for="aluno-matricula">Matrícula</label>
+            <input type="text" id="aluno-matricula" required>
+        </div>
+        <div class="form-group">
+            <label for="aluno-nome">Nome Completo</label>
+            <input type="text" id="aluno-nome" required>
+        </div>
+        <div class="form-group">
+            <label for="aluno-turma">Turma</label>
+            <input type="text" id="aluno-turma" placeholder="Ex: 9º Ano A" required>
+        </div>
+        <div class="form-group">
+            <label for="aluno-status">Status</label>
+            <select id="aluno-status" required>
+                <option value="Ativo">Ativo</option>
+                <option value="Inativo">Inativo</option>
+            </select>
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn-primary">Salvar Aluno</button>
+        </div>
+    </form>
+</div>
