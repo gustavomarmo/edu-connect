@@ -1,35 +1,36 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
 
 :root {
+    /* Cores da Marca */
+    --brand-primary: #0f5a91;
+    --brand-secondary: #2f8fce;
+    --brand-text: #ffffff;
+
+    /* Cores do Tema (Modo Claro) */
     --bg-primary: #f4f7f6;
-    --bg-secondary: #2c3e50;
     --text-primary: #333;
-    --text-secondary: #ffffff;
-    --bg-hover: #34495e;
     --border-color: #ccc;
     --input-bg: #ffffff;
     --icon-inactive: #a0a0a0;
     --icon-active: #2c3e50;
-    --link-color: #3498db;
-    --success-color: #27ae60;
-    --success-hover: #229954;
     --error-color: #e74c3c;
-    --button-text-color: #ffffff;
-        }
+
+    /* Mapeamento de Cores */
+    --bg-secondary: var(--brand-primary);     /* Cor do botão de role ativo */
+    --bg-hover: var(--brand-secondary);      /* Cor do hover no botão de submit */
+    --link-color: var(--brand-primary);      /* Cor do "Esqueci minha senha" */
+    --success-color: var(--brand-primary);   /* Cor do botão "Entrar" */
+    --success-hover: var(--brand-secondary); /* Cor do hover do botão "Entrar" */
+    --button-text-color: var(--brand-text);  /* Texto dos botões (Branco) */
+}
 body.dark-mode {
+    /* Cores do Tema (Modo Escuro) */
     --bg-primary: #1e1e1e;
-    --bg-secondary: #252526;
     --text-primary: #d4d4d4;
-    --text-secondary: #d4d4d4;
-    --bg-hover: #3a3a3a;
     --border-color: #555;
     --input-bg: #2a2a2a;
     --icon-active: #ffffff;
-    --link-color: #5dade2;
-    --success-color: #2ecc71;
-    --success-hover: #27ae60;
     --error-color: #e74c3c;
-    --button-text-color: #d4d4d4;
 }
 
 /* Estilos da Página de Login */
@@ -55,10 +56,11 @@ body {
     border: 1px solid var(--border-color);
     transition: background-color 0.3s ease, border-color 0.3s ease;
 }
-.login-container h1 {
-    margin-top: 0;
+.login-logo {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
     margin-bottom: 25px;
-    color: var(--text-primary);
 }
 .form-group {
     margin-bottom: 20px;
@@ -151,7 +153,7 @@ body.dark-mode .role-btn:hover {
     border: none;
     border-radius: 5px;
     background-color: var(--success-color);
-    color: white;
+    color: var(--button-text-color);
     font-weight: bold;
     transition: background-color 0.2s;
 }
@@ -164,7 +166,7 @@ body.dark-mode .role-btn:hover {
     top: 20px;
     right: 20px;
     display: flex;
-    background-color: var(--bg-hover);
+    background-color: var(--success-color);
     border-radius: 20px;
     padding: 5px;
     z-index: 10;

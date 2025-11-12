@@ -88,6 +88,15 @@ body {
     padding: 10px;
 }
 
+#logout-btn {
+    background: none;
+    border: none;
+    font-size: 1.3rem;
+    cursor: pointer;
+    color: var(--text-secondary);
+    padding: 10px;
+}
+
 .logo-container {
     flex-shrink: 0;
 }
