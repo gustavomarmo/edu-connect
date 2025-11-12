@@ -77,7 +77,7 @@ body {
 .toggle-btn {
     background: none;
     border: none;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     cursor: pointer;
     color: var(--text-primary);
     padding: 10px;
@@ -88,7 +88,7 @@ body {
 }
 
 .logo-img {
-    height: 35px;
+    height: 40px;
     width: auto;
 }
 
@@ -96,8 +96,8 @@ body {
     gap: 10px;
 }
 .user-photo-topbar {
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     object-fit: cover;
 }
@@ -168,11 +168,12 @@ body {
     display: flex;
     align-items: center;
     gap: 15px;
-    padding: 0 20px;
-    height: 60px;
+    padding: 40px 20px;
+    height: 70px;
     background-color: var(--bg-primary);
     border-bottom: 1px solid var(--border-color);
     transition: background-color 1s ease, border-color 1s ease;
+    border-top-left-radius: 20px;
 }
 
 .topbar-item {
