@@ -65,9 +65,9 @@ body {
     overflow: hidden; 
     display: flex;
     flex-direction: column;
+    justify-content: center;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
-
     background-color: var(--bg-secondary);
     color: var(--text-secondary);
     transition: width 0.3s ease, background-color 1s ease;
@@ -127,8 +127,6 @@ body {
 /* Links de Navegação */
 .nav-links {
     list-style: none;
-    flex-grow: 1; 
-    margin-top: 20px;
 }
 
 .nav-links li a{
