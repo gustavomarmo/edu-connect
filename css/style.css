@@ -83,6 +83,15 @@ body {
     padding: 10px;
 }
 
+.logo-container {
+    flex-shrink: 0;
+}
+
+.logo-img {
+    height: 35px;
+    width: auto;
+}
+
 .user-profile-topbar {
     gap: 10px;
 }
