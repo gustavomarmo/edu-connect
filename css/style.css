@@ -2,25 +2,30 @@
 
 /* --- 1. Definição das Variáveis de Tema --- */
 :root {
+
+    --brand-primary: #0f5a91;   /* Azul escuro da logo */
+    --brand-secondary: #2f8fce; /* Azul médio da logo (para hover) */
+    --brand-text: #ffffff;      /* Texto sobre a cor da marca */
+
+    /* Cores do Tema (Modo Claro) */
     --bg-primary: #f4f7f6;       /* Fundo principal (claro) */
-    --bg-secondary: #2c3e50;    /* Fundo da sidebar (escuro) */
-    --text-primary: #333;       /* Texto principal (escuro) */
-    --text-secondary: #ffffff;  /* Texto da sidebar (claro) */
-    --bg-hover: #34495e;        /* Cor de hover na sidebar */
-    --border-color: #34495e;    /* Cor das bordas internas */
+    --text-primary: black;       /* Texto principal (escuro) */
+    --border-color: #e0e0e0;    /* Borda (agora cinza claro) */
+
+    /* Mapeamento (Sidebar/Topbar agora usam a Marca) */
+    --bg-secondary: var(--brand-primary);
+    --text-secondary: var(--brand-text);
+    --bg-hover: var(--brand-secondary);
     
     /* Cores dos ícones de tema */
-    --icon-inactive: #a0a0a0;   /* Cinza para ícone inativo */
-    --icon-active: #2c3e50;     /* Cor do ícone ativo (escuro no modo claro) */
+    --icon-inactive: #a0a0a0;
+    --icon-active: #black;
 }
 
 /* --- 2. Definição do Modo Escuro --- */
 body.dark-mode {
     --bg-primary: #1e1e1e;       /* Fundo principal (escuro) */
-    --bg-secondary: #252526;    /* Fundo da sidebar (um pouco mais claro) */
     --text-primary: #d4d4d4;       /* Texto principal (claro) */
-    --text-secondary: #d4d4d4;  /* Texto da sidebar (claro) */
-    --bg-hover: #3a3a3a;        /* Cor de hover */
     --border-color: #3a3a3a;    /* Cor das bordas */
     
     /* Cor do ícone ativo (branco no modo escuro, como você pediu) */
@@ -79,7 +84,7 @@ body {
     border: none;
     font-size: 1.6rem;
     cursor: pointer;
-    color: var(--text-primary);
+    color: var(--text-secondary);
     padding: 10px;
 }
 
@@ -126,8 +131,7 @@ body {
     margin-top: 20px;
 }
 
-.nav-links li a,
-.logout-section a {
+.nav-links li a{
     display: flex;
     align-items: center;
     padding: 15px 20px;
@@ -142,19 +146,12 @@ body {
     background-color: var(--bg-hover);
 }
 
-.nav-links li a i,
-.logout-section a i {
+.nav-links li a i{
     font-size: 1.2rem;
     margin-right: 15px;
     width: 40px; 
     text-align: center;
     transition: margin 0.3s ease;
-}
-
-/* Seção de Logout */
-.logout-section {
-    border-top: 1px solid var(--border-color);
-    padding: 10px;
 }
 
 .main-content {
@@ -170,10 +167,10 @@ body {
     gap: 15px;
     padding: 40px 20px;
     height: 70px;
-    background-color: var(--bg-primary);
-    border-bottom: 1px solid var(--border-color);
+    background-color: var(--bg-secondary);
     transition: background-color 1s ease, border-color 1s ease;
     border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
 }
 
 .topbar-item {
