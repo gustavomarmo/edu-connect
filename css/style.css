@@ -40,13 +40,18 @@ body {
     font-family: "Roboto Slab", serif;
     display: flex; 
     
-    /* 3. Usando as variáveis e adicionando transição */
     background-color: var(--bg-primary);
     color: var(--text-primary);
     transition: background-color 1s ease, color 1s ease;
 }
 
-/* Sidebar */
+.main-wrapper {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
 .sidebar {
     width: 250px; 
     height: 100vh; 
@@ -58,13 +63,11 @@ body {
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
 
-    /* 3. Usando as variáveis e adicionando transição */
     background-color: var(--bg-secondary);
     color: var(--text-secondary);
     transition: width 0.3s ease, background-color 1s ease;
 }
 
-/* Cabeçalho com o botão de toggle */
 .sidebar-header {
     display: flex;
     justify-content: flex-end; 
@@ -76,17 +79,23 @@ body {
     border: none;
     font-size: 1.5rem;
     cursor: pointer;
-    color: var(--text-secondary);
+    color: var(--text-primary);
     padding: 10px;
 }
 
-/* Perfil do Usuário */
-.user-profile {
-    display: flex;
-    align-items: center;
-    padding: 20px;
-    border-top: 1px solid var(--border-color);
-    border-bottom: 1px solid var(--border-color);
+.user-profile-topbar {
+    gap: 10px;
+}
+.user-photo-topbar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.user-name-topbar {
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: var(--text-primary);
 }
 
 .user-photo {
@@ -139,17 +148,33 @@ body {
     padding: 10px;
 }
 
-/* Estilos do Conteúdo Principal */
 .main-content {
     flex-grow: 1; 
     padding: 20px;
-    position: relative;
-    
+    overflow-y: auto;
     transition: background-color 1s ease, color 1s ease;
 }
 
-/* ESTADO RECOLHIDO (Collapsed) */
-/* Nenhuma mudança de cor, apenas de layout */
+.topbar {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 0 20px;
+    height: 60px;
+    background-color: var(--bg-primary);
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 1s ease, border-color 1s ease;
+}
+
+.topbar-item {
+    display: flex;
+    align-items: center;
+}
+
+.topbar-spacer {
+    flex-grow: 1;
+}
+
 .sidebar.collapsed {
     width: 80px; 
 }
@@ -170,13 +195,7 @@ body {
     justify-content: center;
 }
 
-
-/* Estilos dos Botões de Tema */
-.theme-switcher {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    display: flex;
+.theme-switcher-topbar {
     background-color: var(--bg-hover);
     border-radius: 20px;
     padding: 5px;
@@ -196,9 +215,8 @@ body {
 }
 
 .theme-btn.active {
-    /* Cor do ícone ativo (Branco ou Escuro, dependendo do tema) */
     color: var(--icon-active); 
-    background-color: rgba(0, 0, 0, 0.1); /* Destaque leve */
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 /* CALENDÁRIO */
@@ -268,7 +286,6 @@ body {
     transition: background-color 0.3s, border-color 0.3s;
 }
 
-/* Permissão de clique (só para quem pode editar) */
 #page-content:not(.read-only) .calendar-day {
     cursor: pointer;
 }
@@ -276,7 +293,6 @@ body {
     background-color: var(--bg-hover);
 }
 
-/* Dias de outro mês (cinza) */
 .calendar-day.other-month {
     background-color: transparent;
     color: var(--icon-inactive);
@@ -504,7 +520,6 @@ html {
     scroll-behavior: smooth;
 }
 
-/* Base do widget do formulário */
 .add-form-widget {
     background-color: var(--bg-primary);
     border: 1px solid var(--border-color);
@@ -525,7 +540,6 @@ html {
     padding-bottom: 10px;
 }
 
-/* Grid para o formulário */
 .form-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* 2 colunas */
@@ -557,10 +571,9 @@ html {
 
 /* Faz o nome completo ocupar as 2 colunas */
 .form-group:nth-child(2) {
-    grid-column: 1 / -1; /* Ocupa da coluna 1 até a última */
+    grid-column: 1 / -1;
 }
 
-/* Alinha o botão "Salvar" */
 .form-actions {
     grid-column: 1 / -1;
     text-align: right;
@@ -575,7 +588,7 @@ html {
 /* Media Query para formulário em telas pequenas */
 @media (max-width: 768px) {
     .form-grid {
-        grid-template-columns: 1fr; /* 1 coluna */
+        grid-template-columns: 1fr;
     }
     .form-group:nth-child(2) {
         grid-column: 1; /* Reseta o span */
@@ -586,7 +599,6 @@ html {
 }
 
 /* Dashboards */
-/* Estrutura principal do grid */
 .dashboard-grid {
     margin-top: 53px;
     display: grid;
@@ -610,7 +622,6 @@ html {
     grid-area: noticias;
 }
 
-/* Estilo base do "Cartão" / "Widget" */
 .dashboard-widget {
     background-color: var(--bg-primary);
     border: 1px solid var(--border-color);
@@ -629,10 +640,8 @@ html {
     padding-bottom: 10px;
 }
 
-/* Opções */
 .opcoes-grid {
     display: grid;
-    /* Cria colunas automáticas de no mínimo 120px */
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
     gap: 15px;
 }
@@ -658,7 +667,7 @@ html {
 }
 
 .opcao-item i {
-    font-size: 2rem; /* Ícone grande */
+    font-size: 2rem;
     margin-bottom: 10px;
 }
 
@@ -668,7 +677,6 @@ html {
     line-height: 1.3;
 }
 
-/* Últimas Notas */
 .notas-table {
     width: 100%;
     border-collapse: collapse;
@@ -734,7 +742,6 @@ html {
     line-height: 1.5;
 }
 
-/* Estilizar o link para o calendário dentro da notícia */
 .noticias-list p a.nav-link {
     color: var(--bg-secondary);
     text-decoration: underline;
@@ -753,7 +760,6 @@ html {
     }
 }
 
-/* Página de Desempenho */
 .performance-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr); 
@@ -766,14 +772,12 @@ html {
         "grafico-linhas grafico-linhas";
 }
 
-/* Boletim Completo */
 .widget-boletim-completo {
     grid-area: boletim-completo;
     overflow-x: auto; 
 }
 .boletim-table { width: 100%; }
 
-/* Regra geral para cabeçalhos (TH) do boletim */
 .boletim-table th {
     background-color: var(--bg-hover);
     color: var(--text-secondary);
@@ -781,26 +785,21 @@ html {
     font-size: 0.85rem;
 }
 
-/* Isto alinha "Disciplina", "1º Bimestre", "2º Bimestre" e "Média Anual
-*/
 .boletim-table thead tr:first-child th {
     vertical-align: bottom;
     padding-bottom: 10px;
 }
 
-/* Garante que os cabeçalhos da SEGUNDA LINHA (N1, N2...) tenham o padding padrão */
 .boletim-table thead tr:last-child th {
     padding-top: 16px; 
     padding-bottom: 16px;
 }
 
-/* Correção anterior: Alinha "Disciplina" à esquerda */
 .boletim-table th[rowspan="2"]:first-child { 
     min-width: 120px; 
     text-align: left; 
 }
 
-/* Células do corpo da tabela (TD) */
 .boletim-table td { 
     text-align: center; 
     font-weight: bold; 
@@ -810,9 +809,8 @@ html {
     font-weight: normal; 
 }
 
-/* Estilos para destacar as médias */
 .boletim-table .media-bim {
-    background-color: rgba(0, 0, 0, 0.05); /* Um fundo leve */
+    background-color: rgba(0, 0, 0, 0.05);
     color: var(--text-primary);
 }
 body.dark-mode .boletim-table .media-bim {
@@ -905,10 +903,10 @@ canvas { width: 100% !important; height: 100% !important; }
     grid-area: side-eventos;
 }
 
-/* Organiza os widgets da coluna da direita */
+
 .coord-col-side {
     display: grid;
-    grid-template-rows: auto auto 1fr; /* Kpis, Pizza, Eventos ocupam o resto */
+    grid-template-rows: auto auto 1fr;
     grid-template-areas: 
         "side-kpis"
         "side-pie"
@@ -940,7 +938,6 @@ canvas { width: 100% !important; height: 100% !important; }
 /* Gráfico de Pizza */
 .chart-container-pie { position: relative; height: 300px; width: 100%; }
 
-/* Estilos para a lista de próximos eventos */
 .eventos-list-coord {
     list-style: none;
     padding-left: 0;

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema Escolar</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
 
     <!--Biblioteca para Gráficos (Chart.js)-->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -13,17 +13,6 @@
 <body>
 
     <nav class="sidebar">
-        
-        <header class="sidebar-header">
-            <button class="toggle-btn" id="toggle-btn">
-                <i class="fa-solid fa-bars"></i>
-            </button>
-        </header>
-
-        <div class="user-profile">
-            <img src="images/IMG_8792.jpg" alt="Foto do Usuário" class="user-photo">
-            <span class="link-text user-name">Gustavo Marmo</span>
-        </div>
 
         <ul class="nav-links">
             <li id="nav-dashboard">
@@ -57,30 +46,52 @@
                 </a>
             </li>
         </ul>
-
-        <div class="logout-section">
-            <a href="#" id="logout-btn">
-                <i class="fa-solid fa-right-from-bracket"></i>
-                <span class="link-text">Logout</span>
-            </a>
-        </div>
     </nav>
 
-    <main class="main-content" id="main-content">
-        
-        <div class="theme-switcher">
-            <button id="theme-sun" class="theme-btn active">
-                <i class="fa-solid fa-sun"></i>
-            </button>
-            <button id="theme-moon" class="theme-btn">
-                <i class="fa-solid fa-moon"></i>
-            </button>
-        </div>
+    <div class="main-wrapper">
 
-        <div id="page-content"></div>
+        <header class="topbar">
+            
+            <div class="topbar-item">
+                <button class="toggle-btn" id="toggle-btn">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
 
-    </main>
+            <div class="topbar-item logo-container">
+                <span class="logo-text">Edu Connect</span>
+            </div>
 
-    <script src="script.js"></script>
+            <div class="topbar-spacer"></div> 
+
+            <div class="topbar-item user-profile-topbar">
+                <img src="images/IMG_8792.jpg" alt="Foto do Usuário" class="user-photo-topbar">
+                <span class="user-name-topbar">Gustavo Marmo</span>
+            </div>
+
+            <div class="topbar-item theme-switcher-topbar" id="theme-switcher">
+                 <button id="theme-sun" class="theme-btn active">
+                    <i class="fa-solid fa-sun"></i>
+                </button>
+                <button id="theme-moon" class="theme-btn">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+            </div>
+
+            <div class="topbar-item logout-topbar">
+                <a href="#" id="logout-btn">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </a>
+            </div>
+
+        </header>
+
+        <main class="main-content" id="main-content">
+            <div id="page-content"></div>
+        </main>
+
+    </div>
+
+    <script src="js/script.js" type="module"></script>
 </body>
 </html>

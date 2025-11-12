@@ -14,7 +14,7 @@
     --success-color: #27ae60;
     --success-hover: #229954;
     --error-color: #e74c3c;
-    --button-text-color: #ffffff; /* Cor do texto no botão de active e submit */
+    --button-text-color: #ffffff;
         }
 body.dark-mode {
     --bg-primary: #1e1e1e;
@@ -110,7 +110,7 @@ body {
     cursor: pointer;
     border: 1px solid var(--border-color);
     border-radius: 5px;
-    background-color: transparent; /* Fundo transparente */
+    background-color: transparent;
     color: var(--text-primary);
     transition: background-color 0.2s, border-color 0.2s, color 0.2s;
     display: flex;
@@ -159,7 +159,6 @@ body.dark-mode .role-btn:hover {
     background-color: var(--success-hover);
 }
 
-/* Botões de troca de tema*/
 .theme-switcher {
     position: absolute;
     top: 20px;
@@ -191,7 +190,6 @@ body.dark-mode .theme-btn.active {
 @media (max-width: 500px) {
     .login-container {
         padding: 30px 20px; 
-        /* Garante que não ultrapasse a tela */
         width: 90%; 
     }
 
