@@ -58,7 +58,7 @@ body {
 }
 
 .sidebar {
-    width: 250px; 
+    width: 210px; 
     height: 100vh; 
     position: sticky; 
     top: 0;
@@ -66,11 +66,11 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
     background-color: var(--bg-secondary);
     color: var(--text-secondary);
     transition: width 0.3s ease, background-color 1s ease;
+    box-shadow: 5px 5px 5px grey;
 }
 
 .sidebar-header {
@@ -118,7 +118,7 @@ body {
 .user-name-topbar {
     font-weight: bold;
     font-size: 0.9rem;
-    color: var(--text-primary);
+    color: var(--text-secondary);
 }
 
 .user-photo {
@@ -176,8 +176,11 @@ body {
     height: 70px;
     background-color: var(--bg-secondary);
     transition: background-color 1s ease, border-color 1s ease;
-    border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    box-shadow: 5px 5px 5px grey;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .topbar-item {
@@ -673,6 +676,7 @@ html {
     text-align: center;
     transition: transform 0.2s ease, background-color 0.2s;
     min-height: 110px;
+    box-shadow: 5px 5px 5px grey;
 }
 
 .opcao-item:hover {
