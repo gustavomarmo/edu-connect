@@ -1,17 +1,3 @@
-// gustavomarmo/edu-connect/edu-connect-054a0530013bd5b510abada99aec7585770a74b4/apiService.js
-
-/**
- * ----------------------------------------------------------------
- * apiService.js - A CAMADA DE DADOS (O "GARÇOM")
- * ----------------------------------------------------------------
- * * Responsabilidade: Gerenciar todo o acesso aos dados do aplicativo.
- * - Contém os dados mockados (simulando um banco de dados).
- * - Expõe funções assíncronas (async) para buscar ou modificar dados.
- * - Simula a latência de rede com 'simulateNetworkDelay'.
- * - NUNCA deve manipular o DOM (sem document.getElementById etc.).
- */
-
-// --- 1. FUNÇÃO UTILITÁRIA PARA SIMULAR LATÊNCIA DA API ---
 
 /**
  * Simula uma espera de rede (ex: 300ms)
@@ -19,9 +5,6 @@
  */
 const simulateNetworkDelay = (ms = 300) => new Promise(res => setTimeout(res, ms));
 
-
-// --- 2. "BANCO DE DADOS" PRIVADO (MOCK DATA) ---
-// Usamos '_' para indicar que são variáveis internas deste módulo.
 
 let _calendarEvents = JSON.parse(localStorage.getItem('calendarEvents')) || {};
 
@@ -68,10 +51,6 @@ const _mockProfessorAtencao = [
     { nome: "Fernando Alves", turma: "7º Ano C", media: 7.0, frequencia: "75%" },
 ];
 
-
-// --- 3. INTERFACE PÚBLICA (FUNÇÕES EXPORTADAS) ---
-
-// --- ALUNOS ---
 
 /**
  * Busca a lista de alunos, opcionalmente filtrada.
@@ -262,8 +241,6 @@ export async function getAvailableSubjects() {
 }
 
 
-// --- DASHBOARDS ---
-
 /**
  * Busca dados consolidados para o Dashboard do Professor.
  * @returns {Promise<object>}
@@ -288,7 +265,7 @@ export async function getProfessorDashboardData() {
  * @returns {Promise<object>}
  */
 export async function getCoordenadorDashboardData() {
-    await simulateNetworkDelay(600); // Mais demorado, pois "calcula" mais coisas
+    await simulateNetworkDelay(600);
 
     // --- KPIs ---
     const totalAlunos = _mockStudentData.length;
@@ -319,7 +296,6 @@ export async function getCoordenadorDashboardData() {
             
             _calendarEvents[dateKey].forEach(titulo => {
                  eventosFuturos.push({ 
-                    // Formata a data para ser facilmente ordenada
                     dataISO: dataEvento.toISOString(), 
                     dia: String(dataEvento.getDate()).padStart(2, '0'),
                     mes: String(dataEvento.getMonth() + 1).padStart(2, '0'),
@@ -333,7 +309,6 @@ export async function getCoordenadorDashboardData() {
 
     const kpis = { totalAlunos, totalProf, mediaEscola, contagemEventos };
 
-    // --- Gráfico de Barras (Média por Matéria) ---
     const materiasLabels = _mockBoletimData.map(row => row.materia);
     const materiasMedias = _mockBoletimData.map(row => {
         const mediaBim1 = (row.n1_n1 + row.n1_n2 + row.n1_ativ) / 3;
@@ -342,7 +317,6 @@ export async function getCoordenadorDashboardData() {
     });
     const barChartData = { labels: materiasLabels, data: materiasMedias };
 
-    // --- Gráfico de Pizza (Alunos por Turma) ---
     const contagemTurmas = {};
     _mockStudentData.forEach(aluno => {
         contagemTurmas[aluno.turma] = (contagemTurmas[aluno.turma] || 0) + 1;

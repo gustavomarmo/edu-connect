@@ -19,6 +19,117 @@ let lineChartInstance = null;
 let barChartCoordInstance = null;
 let pieChartCoordInstance = null;
 
+const allNavLinks = [
+    // --- Comum a Todos ---
+    { 
+        id: 'nav-dashboard', // ID 'nav-dashboard' é especial e tratado pela função abaixo
+        href: 'pages/dashboard.html', // O 'href' base (será sobrescrito para dashboard-[role].html)
+        icon: 'fa-solid fa-house', 
+        text: 'Início', 
+        roles: ['aluno', 'professor', 'coordenador'] 
+    },
+    { 
+        id: 'nav-calendario', 
+        href: 'pages/calendario.html', 
+        icon: 'fa-solid fa-calendar', 
+        text: 'Calendário', 
+        roles: ['aluno', 'professor', 'coordenador'] 
+    },
+    
+    // --- Aluno & Professor ---
+    { 
+        id: 'nav-atividades', 
+        href: 'pages/atividades.html', 
+        icon: 'fa-solid fa-file-pen', 
+        text: 'Atividades', 
+        roles: ['aluno', 'professor'] 
+    },
+    { 
+        id: 'nav-repositorios', 
+        href: 'pages/repositorios.html', 
+        icon: 'fa-solid fa-folder-open', 
+        text: 'Repositórios', 
+        roles: ['aluno', 'professor'] 
+    },
+    
+    // --- Aluno & Coordenador ---
+    { 
+        id: 'nav-biblioteca', 
+        href: 'pages/biblioteca.html', 
+        icon: 'fa-solid fa-book-bookmark', 
+        text: 'Biblioteca', 
+        roles: ['aluno', 'coordenador'] 
+    },
+    
+    // --- Apenas Aluno ---
+    { 
+        id: 'nav-boletim', 
+        href: 'pages/desempenho.html', // Reutiliza sua página de desempenho existente
+        icon: 'fa-solid fa-chart-simple', 
+        text: 'Boletim', 
+        roles: ['aluno'] 
+    },
+    { 
+        id: 'nav-faltas', 
+        href: 'pages/faltas.html', // Nova página
+        icon: 'fa-solid fa-list-check', 
+        text: 'Faltas', 
+        roles: ['aluno'] 
+    },
+    { 
+        id: 'nav-extra', 
+        href: 'pages/extra.html', // Nova página
+        icon: 'fa-solid fa-shapes', 
+        text: 'Extracurricular', 
+        roles: ['aluno'] 
+    },
+    { 
+        id: 'nav-saida', 
+        href: 'pages/saida.html', // Nova página
+        icon: 'fa-solid fa-person-running', 
+        text: 'Saída Antecipada', 
+        roles: ['aluno'] 
+    },
+
+    // --- Apenas Professor ---
+    { 
+        id: 'nav-frequencia', 
+        href: 'pages/frequencia.html', // Nova página
+        icon: 'fa-solid fa-list-check', 
+        text: 'Registrar Frequência', 
+        roles: ['professor'] 
+    },
+    { 
+        id: 'nav-notas', 
+        href: 'pages/notas.html', // Nova página
+        icon: 'fa-solid fa-pen-to-square', 
+        text: 'Registrar Notas', 
+        roles: ['professor'] 
+    },
+
+    // --- Apenas Coordenador ---
+    { 
+        id: 'nav-alunos', 
+        href: 'pages/alunos.html', 
+        icon: 'fa-solid fa-person', 
+        text: 'Alunos', 
+        roles: ['coordenador'] 
+    },
+    { 
+        id: 'nav-professores', 
+        href: 'pages/professores.html', 
+        icon: 'fa-solid fa-person-chalkboard', 
+        text: 'Professores', 
+        roles: ['coordenador'] 
+    },
+    { 
+        id: 'nav-avisos', 
+        href: 'pages/avisos.html', // Nova página
+        icon: 'fa-solid fa-bullhorn', 
+        text: 'Avisos e notificações', 
+        roles: ['coordenador'] 
+    }
+];
 
 // --- 2. FUNÇÕES GLOBAIS DA UI (TEMA, SIDEBAR) ---
 
@@ -47,28 +158,35 @@ export function applySavedTheme() {
  * @param {string} role - O perfil ('aluno', 'professor', 'coordenador')
  */
 export function setupSidebar(role) {
-    document.getElementById('nav-alunos').style.display = 'none';
-    document.getElementById('nav-professores').style.display = 'none';
-    document.getElementById('nav-desempenho').style.display = 'none';
+    const navLinksContainer = document.querySelector('.nav-links');
+    if (!navLinksContainer) return;
 
-    switch (role) {
-        case 'aluno':
-            document.getElementById('nav-desempenho').style.display = 'list-item';
-            break;
-        case 'professor':
-            document.getElementById('nav-alunos').style.display = 'list-item';
-            break;
-        case 'coordenador':
-            document.getElementById('nav-alunos').style.display = 'list-item';
-            document.getElementById('nav-professores').style.display = 'list-item';
-            break;
-    }
+    // 1. Filtra os links que o usuário atual (role) pode ver
+    const accessibleLinks = allNavLinks.filter(link => link.roles.includes(role));
 
-    // Define o link correto para o dashboard principal
-    const dashboardLink = document.querySelector('#nav-dashboard a');
-    if (dashboardLink) {
-        dashboardLink.href = `pages/dashboard-${role}.html`;
-    }
+    // 2. Gera o HTML para cada link acessível
+    const htmlToRender = accessibleLinks.map(link => {
+        
+        let href = link.href;
+        
+        // Lógica especial para o 'Início' (dashboard)
+        // Ela muda o link para 'dashboard-aluno.html', 'dashboard-professor.html', etc.
+        if (link.id === 'nav-dashboard') {
+            href = `pages/dashboard-${role}.html`;
+        }
+
+        return `
+            <li id="${link.id}">
+                <a href="${href}" class="nav-link">
+                    <i class="${link.icon}"></i>
+                    <span class="link-text">${link.text}</span>
+                </a>
+            </li>
+        `;
+    }).join(''); // Junta todos os <li>'s em uma string única
+
+    // 3. Insere o HTML gerado no container
+    navLinksContainer.innerHTML = htmlToRender;
 }
 
 
