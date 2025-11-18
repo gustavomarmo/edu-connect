@@ -38,13 +38,6 @@ const allNavLinks = [
     
     // --- Aluno & Professor ---
     { 
-        id: 'nav-atividades', 
-        href: 'pages/atividades.html', 
-        icon: 'fa-solid fa-file-pen', 
-        text: 'Atividades', 
-        roles: ['aluno', 'professor'] 
-    },
-    { 
         id: 'nav-repositorios', 
         href: 'pages/repositorios.html', 
         icon: 'fa-solid fa-folder-open', 
