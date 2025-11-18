@@ -22,8 +22,8 @@ let pieChartCoordInstance = null;
 const allNavLinks = [
     // --- Comum a Todos ---
     { 
-        id: 'nav-dashboard', // ID 'nav-dashboard' é especial e tratado pela função abaixo
-        href: 'pages/dashboard.html', // O 'href' base (será sobrescrito para dashboard-[role].html)
+        id: 'nav-dashboard',
+        href: 'pages/dashboard.html',
         icon: 'fa-solid fa-house', 
         text: 'Início', 
         roles: ['aluno', 'professor', 'coordenador'] 
@@ -38,47 +38,30 @@ const allNavLinks = [
     
     // --- Aluno & Professor ---
     { 
-        id: 'nav-repositorios', 
-        href: 'pages/repositorios.html', 
+        id: 'nav-materias', 
+        href: 'pages/materias.html', 
         icon: 'fa-solid fa-folder-open', 
-        text: 'Repositórios', 
+        text: 'Matérias', 
         roles: ['aluno', 'professor'] 
     },
-    
-    // --- Aluno & Coordenador ---
-    { 
-        id: 'nav-biblioteca', 
-        href: 'pages/biblioteca.html', 
-        icon: 'fa-solid fa-book-bookmark', 
-        text: 'Biblioteca', 
-        roles: ['aluno', 'coordenador'] 
-    },
-    
     // --- Apenas Aluno ---
     { 
         id: 'nav-boletim', 
-        href: 'pages/desempenho.html', // Reutiliza sua página de desempenho existente
+        href: 'pages/desempenho.html',
         icon: 'fa-solid fa-chart-simple', 
         text: 'Boletim', 
         roles: ['aluno'] 
     },
     { 
-        id: 'nav-faltas', 
-        href: 'pages/faltas.html', // Nova página
-        icon: 'fa-solid fa-list-check', 
-        text: 'Faltas', 
-        roles: ['aluno'] 
-    },
-    { 
         id: 'nav-extra', 
-        href: 'pages/extra.html', // Nova página
+        href: 'pages/extra.html',
         icon: 'fa-solid fa-shapes', 
         text: 'Extracurricular', 
         roles: ['aluno'] 
     },
     { 
         id: 'nav-saida', 
-        href: 'pages/saida.html', // Nova página
+        href: 'pages/saida.html',
         icon: 'fa-solid fa-person-running', 
         text: 'Saída Antecipada', 
         roles: ['aluno'] 
@@ -87,14 +70,14 @@ const allNavLinks = [
     // --- Apenas Professor ---
     { 
         id: 'nav-frequencia', 
-        href: 'pages/frequencia.html', // Nova página
+        href: 'pages/frequencia.html',
         icon: 'fa-solid fa-list-check', 
         text: 'Registrar Frequência', 
         roles: ['professor'] 
     },
     { 
         id: 'nav-notas', 
-        href: 'pages/notas.html', // Nova página
+        href: 'pages/notas.html',
         icon: 'fa-solid fa-pen-to-square', 
         text: 'Registrar Notas', 
         roles: ['professor'] 
@@ -116,10 +99,17 @@ const allNavLinks = [
         roles: ['coordenador'] 
     },
     { 
-        id: 'nav-avisos', 
-        href: 'pages/avisos.html', // Nova página
+        id: 'nav-comunicados', 
+        href: 'pages/comunicados.html',
         icon: 'fa-solid fa-bullhorn', 
-        text: 'Avisos e notificações', 
+        text: 'Comunicados', 
+        roles: ['coordenador'] 
+    },
+    {
+        id: 'nav-config', 
+        href: 'pages/config.html',
+        icon: 'fa-solid fa-gear', 
+        text: 'Configurações', 
         roles: ['coordenador'] 
     }
 ];
