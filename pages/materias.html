@@ -1,0 +1,40 @@
+<div class="materias-container">
+    <aside class="materias-sidebar">
+        <h3 class="sidebar-title">Minhas Turmas</h3>
+        <ul id="lista-disciplinas" class="disciplinas-nav">
+            </ul>
+    </aside>
+
+    <section class="materias-content">
+        <header class="content-header">
+            <h2 id="disciplina-titulo">Selecione uma matéria</h2>
+            
+            <div id="teacher-actions" class="teacher-controls" style="display: none;">
+                <button class="btn-secondary" id="btn-novo-topico">
+                    <i class="fa-solid fa-folder-plus"></i> Novo Tópico
+                </button>
+                <button class="btn-primary" id="btn-novo-material">
+                    <i class="fa-solid fa-file-circle-plus"></i> Adicionar Material
+                </button>
+            </div>
+        </header>
+
+        <div id="conteudo-modulos" class="modules-list">
+            </div>
+    </section>
+</div>
+
+<div class="modal-overlay" id="upload-modal">
+    <div class="event-modal">
+        <h3>Enviar Atividade</h3>
+        <p>Atividade: <strong id="upload-task-name">--</strong></p>
+        <form id="form-upload-atividade">
+            <label for="file-upload">Selecione o arquivo:</label>
+            <input type="file" id="file-upload" required>
+            <div class="modal-buttons">
+                <button type="button" onclick="document.getElementById('upload-modal').style.display='none'">Cancelar</button>
+                <button type="submit" class="btn-primary">Enviar</button>
+            </div>
+        </form>
+    </div>
+</div>

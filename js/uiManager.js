@@ -1,4 +1,4 @@
-// gustavomarmo/edu-connect/edu-connect-054a0530013bd5b510abada99aec7585770a74b4/uiManager.js
+ 
 
 /**
  * ----------------------------------------------------------------
@@ -12,15 +12,11 @@
  * - É "burro": apenas recebe dados e os desenha.
  */
 
-// --- 1. VARIÁVEIS DE ESTADO DA UI (PRIVADAS) ---
-
-// Instâncias dos gráficos para que possam ser destruídas antes de recriar
 let lineChartInstance = null;
 let barChartCoordInstance = null;
 let pieChartCoordInstance = null;
 
 const allNavLinks = [
-    // --- Comum a Todos ---
     { 
         id: 'nav-dashboard',
         href: 'pages/dashboard.html',
@@ -35,8 +31,6 @@ const allNavLinks = [
         text: 'Calendário', 
         roles: ['aluno', 'professor', 'coordenador'] 
     },
-    
-    // --- Aluno & Professor ---
     { 
         id: 'nav-materias', 
         href: 'pages/materias.html', 
@@ -44,7 +38,6 @@ const allNavLinks = [
         text: 'Matérias', 
         roles: ['aluno', 'professor'] 
     },
-    // --- Apenas Aluno ---
     { 
         id: 'nav-boletim', 
         href: 'pages/desempenho.html',
@@ -66,8 +59,6 @@ const allNavLinks = [
         text: 'Saída Antecipada', 
         roles: ['aluno'] 
     },
-
-    // --- Apenas Professor ---
     { 
         id: 'nav-frequencia', 
         href: 'pages/frequencia.html',
@@ -82,8 +73,6 @@ const allNavLinks = [
         text: 'Registrar Notas', 
         roles: ['professor'] 
     },
-
-    // --- Apenas Coordenador ---
     { 
         id: 'nav-alunos', 
         href: 'pages/alunos.html', 
@@ -114,11 +103,6 @@ const allNavLinks = [
     }
 ];
 
-// --- 2. FUNÇÕES GLOBAIS DA UI (TEMA, SIDEBAR) ---
-
-/**
- * Aplica o tema (light/dark) salvo no localStorage ao carregar a página.
- */
 export function applySavedTheme() {
     const body = document.body;
     const sunBtn = document.getElementById('theme-sun');
@@ -144,16 +128,12 @@ export function setupSidebar(role) {
     const navLinksContainer = document.querySelector('.nav-links');
     if (!navLinksContainer) return;
 
-    // 1. Filtra os links que o usuário atual (role) pode ver
     const accessibleLinks = allNavLinks.filter(link => link.roles.includes(role));
 
-    // 2. Gera o HTML para cada link acessível
     const htmlToRender = accessibleLinks.map(link => {
         
         let href = link.href;
         
-        // Lógica especial para o 'Início' (dashboard)
-        // Ela muda o link para 'dashboard-aluno.html', 'dashboard-professor.html', etc.
         if (link.id === 'nav-dashboard') {
             href = `pages/dashboard-${role}.html`;
         }
@@ -166,14 +146,10 @@ export function setupSidebar(role) {
                 </a>
             </li>
         `;
-    }).join(''); // Junta todos os <li>'s em uma string única
+    }).join('');  
 
-    // 3. Insere o HTML gerado no container
     navLinksContainer.innerHTML = htmlToRender;
 }
-
-
-// --- 3. CALENDÁRIO ---
 
 /**
  * Renderiza o grid do calendário para um mês/ano específico.
@@ -182,7 +158,7 @@ export function setupSidebar(role) {
  */
 export function renderCalendar(date, events = {}) {
     const monthYearEl = document.getElementById('month-year');
-    if (!monthYearEl) return; // Sai se a página não for o calendário
+    if (!monthYearEl) return;  
 
     const year = date.getFullYear();
     const month = date.getMonth();
@@ -200,18 +176,15 @@ export function renderCalendar(date, events = {}) {
     const lastDateOfMonth = lastDay.getDate();
     const prevLastDay = new Date(year, month, 0);
     const prevLastDate = prevLastDay.getDate();
-
-    // Dias do mês anterior
+     
     for (let i = firstDayOfWeek; i > 0; i--) {
         calendarDays.innerHTML += `<div class="calendar-day other-month"><span>${prevLastDate - i + 1}</span></div>`;
     }
-
-    // Dias do mês atual
+     
     for (let i = 1; i <= lastDateOfMonth; i++) {
         const currentDate = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
         let eventsHtml = '<div class="day-events">';
         
-        // Usa o objeto 'events' passado como parâmetro
         if (events[currentDate]) {
             events[currentDate].forEach(eventTitle => {
                 eventsHtml += `<div class="event-item">${eventTitle}</div>`;
@@ -227,10 +200,9 @@ export function renderCalendar(date, events = {}) {
         `;
     }
 
-    // Dias do próximo mês
     const totalDays = calendarDays.children.length;
     let nextDay = 1;
-    while (totalDays + nextDay - 1 < 42) { // 42 é 6 (linhas) * 7 (colunas)
+    while (totalDays + nextDay - 1 < 42) {  
         calendarDays.innerHTML += `<div class="calendar-day other-month"><span>${nextDay}</span></div>`;
         nextDay++;
     }
@@ -249,9 +221,6 @@ export function openEventModal(date) {
     document.getElementById('event-title').focus();
 }
 
-/**
- * Fecha o modal de eventos.
- */
 export function closeEventModal() {
     document.getElementById('event-modal-overlay').style.display = 'none';
 }
@@ -265,9 +234,6 @@ export function getEventModalData() {
     const title = document.getElementById('event-title').value.trim();
     return { date, title };
 }
-
-
-// --- 4. TABELAS (ALUNOS E PROFESSORES) ---
 
 /**
  * Renderiza a tabela de alunos.
@@ -317,12 +283,12 @@ export function renderTeacherTable(teacherList = []) {
     }
 
     teacherList.forEach(teacher => {
-        // Trata os 3 status possíveis
+         
         let statusClass = '';
         switch(teacher.status) {
             case 'Ativo': statusClass = 'status-ativo'; break;
             case 'Inativo': statusClass = 'status-inativo'; break;
-            default: statusClass = ''; // Para 'Licença'
+            default: statusClass = '';  
         }
 
         tableBody.innerHTML += `
@@ -343,7 +309,7 @@ export function renderTeacherTable(teacherList = []) {
 }
 
 
-// --- 5. FORMULÁRIOS (ALUNOS E PROFESSORES) ---
+ 
 
 /**
  * Mostra o formulário de adição (rolando até ele).
@@ -368,7 +334,7 @@ export function clearAndFocusForm(formId, firstInputId) {
     const firstInput = document.getElementById(firstInputId);
     if(firstInput) firstInput.focus();
 
-    // Rola a tabela (onde os dados aparecem) para a vista
+     
     const tableId = formId.includes('aluno') ? 'student-table' : 'teacher-table';
     document.getElementById(tableId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
@@ -402,7 +368,7 @@ export function getTeacherFormData() {
 }
 
 
-// --- 6. PÁGINA DE DESEMPENHO (ALUNO) ---
+ 
 
 /**
  * Renderiza a tabela de boletim (notas).
@@ -482,7 +448,7 @@ export function renderEvolutionChart(chartLabels, chartData) {
 
     const chartRedColor = '#c0392b';
     
-    // Destrói o gráfico anterior para evitar sobreposição
+     
     if (lineChartInstance) { 
         lineChartInstance.destroy(); 
     }
@@ -515,7 +481,7 @@ export function renderEvolutionChart(chartLabels, chartData) {
 }
 
 
-// --- 7. DASHBOARD DO PROFESSOR ---
+ 
 
 /**
  * Renderiza os KPIs e a tabela de atenção do Dashboard do Professor.
@@ -523,7 +489,7 @@ export function renderEvolutionChart(chartLabels, chartData) {
  * @param {Array} alunosAtencao - Lista de alunos
  */
 export function renderProfessorDashboard(kpis, alunosAtencao = []) {
-    // KPIs
+     
     const kpiMedia = document.getElementById('kpi-media-turma');
     const kpiFreq = document.getElementById('kpi-frequencia-turma');
     const kpiRec = document.getElementById('kpi-recuperacao-turma');
@@ -532,7 +498,7 @@ export function renderProfessorDashboard(kpis, alunosAtencao = []) {
     if (kpiFreq) kpiFreq.innerText = kpis.frequenciaTurma || '--';
     if (kpiRec) kpiRec.innerText = kpis.recuperacaoTurma || '--';
 
-    // Tabela
+     
     const tableBody = document.getElementById('atencao-table-body');
     if (!tableBody) return;
     tableBody.innerHTML = '';
@@ -555,7 +521,7 @@ export function renderProfessorDashboard(kpis, alunosAtencao = []) {
 }
 
 
-// --- 8. DASHBOARD DO COORDENADOR ---
+ 
 
 /**
  * Renderiza os KPIs do Dashboard do Coordenador.
@@ -590,7 +556,7 @@ export function renderCoordenadorBarChart(barChartData) {
             datasets: [{
                 label: 'Média Geral da Matéria',
                 data: barChartData.data,
-                backgroundColor: '#c0392b', // Vermelho
+                backgroundColor: '#c0392b',  
                 borderRadius: 4
             }]
         },
@@ -656,9 +622,6 @@ export function renderProximosEventosCoord(eventosFuturos = []) {
     });
 }
 
-
-// --- 9. PERMISSÕES ---
-
 /**
  * Aplica permissões de "somente leitura" à página carregada.
  * @param {string} role - O perfil do usuário
@@ -671,16 +634,15 @@ export function applyPagePermissions(role, url) {
     pageContainer.classList.remove('read-only');
     let isReadOnly = false;
 
-    // Lógica de quem pode editar o quê:
     if (role === 'aluno') {
         isReadOnly = true; 
     } else if (role === 'professor') {
-        // Professor só edita calendário e alunos
+         
         if (!url.includes('calendario.html') && !url.includes('alunos.html')) {
             isReadOnly = true;
         }
     } else if (role === 'coordenador') {
-        // Coordenador edita calendário, alunos e professores
+         
         if (!url.includes('calendario.html') && !url.includes('alunos.html') && !url.includes('professores.html')) {
             isReadOnly = true;
         }
@@ -689,11 +651,10 @@ export function applyPagePermissions(role, url) {
     if (isReadOnly) {
         pageContainer.classList.add('read-only');
         
-        // Desabilita todos os controles, exceto os de navegação/filtro
         const interactiveElements = pageContainer.querySelectorAll('input, button, textarea, select, form');
         
         interactiveElements.forEach(el => {
-            // IDs que devem permanecer FUNCIONANDO mesmo em read-only
+             
             const safeIds = [
                 'student-search-input', 
                 'teacher-search-input',
@@ -707,8 +668,121 @@ export function applyPagePermissions(role, url) {
             }
         });
     } else {
-        // Garante que se a permissão existir, todos os campos estejam habilitados
+         
         const interactiveElements = pageContainer.querySelectorAll('input, button, textarea, select, form');
         interactiveElements.forEach(el => el.disabled = false);
     }
+}
+
+/**
+ * Renderiza a sidebar com a lista de matérias.
+ */
+export function renderMateriasSidebar(subjects, onSelectCallback) {
+    const listEl = document.getElementById('lista-disciplinas');
+    if (!listEl) return;
+    listEl.innerHTML = '';
+
+    subjects.forEach((subj, index) => {
+        const li = document.createElement('li');
+        li.className = 'disciplina-item';
+        li.innerHTML = `<i class="fa-solid fa-book"></i> ${subj}`;
+         
+        if (index === 0) li.classList.add('active');
+
+        li.addEventListener('click', () => {
+             
+            document.querySelectorAll('.disciplina-item').forEach(el => el.classList.remove('active'));
+            li.classList.add('active');
+            onSelectCallback(subj);
+        });
+
+        listEl.appendChild(li);
+    });
+}
+
+/**
+ * Renderiza o conteúdo principal da matéria selecionada.
+ * @param {string} subjectName - Nome da matéria
+ * @param {Array} modules - Lista de módulos e conteúdos
+ * @param {string} userRole - 'aluno' ou 'professor'
+ */
+export function renderSubjectContent(subjectName, modules, userRole) {
+    const titleEl = document.getElementById('disciplina-titulo');
+    const contentEl = document.getElementById('conteudo-modulos');
+    const teacherActions = document.getElementById('teacher-actions');
+
+    if (titleEl) titleEl.innerText = subjectName;
+    if (!contentEl) return;
+
+     
+    if (teacherActions) {
+        teacherActions.style.display = (userRole === 'professor') ? 'flex' : 'none';
+    }
+
+    contentEl.innerHTML = '';
+
+    if (modules.length === 0) {
+        contentEl.innerHTML = '<p style="text-align:center; color:var(--icon-inactive);">Nenhum conteúdo disponível.</p>';
+        return;
+    }
+
+    modules.forEach(module => {
+        let itemsHtml = '';
+
+        module.itens.forEach(item => {
+             
+            let iconClass = 'fa-file-lines';
+            if (item.type === 'link') iconClass = 'fa-video';
+            if (item.type === 'assignment') iconClass = 'fa-clipboard-list';
+
+             
+            let actionsHtml = '';
+            
+            if (userRole === 'professor') {
+                 
+                actionsHtml += `<button title="Editar"><i class="fa-solid fa-pen"></i></button>`;
+                actionsHtml += `<button title="Excluir"><i class="fa-solid fa-trash"></i></button>`;
+                if (item.type === 'assignment') {
+                    actionsHtml += `<button title="Ver Envios"><i class="fa-solid fa-users-viewfinder"></i></button>`;
+                }
+            } else {
+                 
+                if (item.type === 'file') {
+                    actionsHtml += `<button title="Baixar"><i class="fa-solid fa-download"></i></button>`;
+                } else if (item.type === 'assignment') {
+                    const statusBadge = item.status === 'Entregue' 
+                        ? `<span class="status-badge badge-entregue">Entregue</span>` 
+                        : `<span class="status-badge badge-pendente">Pendente</span>`;
+                    
+                     
+                    actionsHtml += statusBadge;
+                    actionsHtml += `<button class="btn-upload-trigger" data-id="${item.id}" data-name="${item.nome}" title="Enviar"><i class="fa-solid fa-upload"></i></button>`;
+                }
+            }
+
+            itemsHtml += `
+                <li class="resource-item">
+                    <div class="resource-info">
+                        <i class="fa-solid ${iconClass} resource-icon"></i>
+                        <div class="resource-meta">
+                            <span class="resource-name">${item.nome}</span>
+                            <span class="resource-desc">${item.desc}</span>
+                        </div>
+                    </div>
+                    <div class="resource-actions">
+                        ${actionsHtml}
+                    </div>
+                </li>
+            `;
+        });
+
+        contentEl.innerHTML += `
+            <div class="module-block">
+                <h4 class="module-title"><i class="fa-solid fa-caret-down"></i> ${module.titulo}</h4>
+                <ul class="resources-list">
+                    ${itemsHtml}
+                </ul>
+            </div>
+        `;
+    });
 }

@@ -1,9 +1,7 @@
-// Encontrar temas
 const body = document.body;
 const sunBtn = document.getElementById('theme-sun');
 const moonBtn = document.getElementById('theme-moon');
 
-// Aplicar o tema
 function applySavedTheme() {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dark') {
@@ -11,14 +9,12 @@ function applySavedTheme() {
         moonBtn.classList.add('active');
         sunBtn.classList.remove('active');
     } else {
-        // Se for 'light' ou não houver nada salvo, garante o modo claro
         body.classList.remove('dark-mode');
         sunBtn.classList.add('active');
         moonBtn.classList.remove('active');
     }
 }
 
-// Escutadores dos botões de tema
 sunBtn.addEventListener('click', function() {
     body.classList.remove('dark-mode');
     sunBtn.classList.add('active');
@@ -35,7 +31,6 @@ moonBtn.addEventListener('click', function() {
 
 applySavedTheme();
 
-// Lógica de Login
 const loginForm = document.getElementById('login-form');
 const emailInput = document.getElementById('email');
 const passwordInput = document.getElementById('password');

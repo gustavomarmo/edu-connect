@@ -1,6 +1,6 @@
 
 /**
- * Simula uma espera de rede (ex: 300ms)
+ * Simula uma espera de rede
  * @param {number} ms - Tempo em milissegundos para a espera.
  */
 const simulateNetworkDelay = (ms = 300) => new Promise(res => setTimeout(res, ms));
@@ -327,4 +327,72 @@ export async function getCoordenadorDashboardData() {
     };
 
     return Promise.resolve({ kpis, barChartData, pieChartData, proximosEventos: eventosFuturos });
+}
+
+// --- MATÉRIAS E CONTEÚDO (MOCK) ---
+
+const _mockMateriasContent = {
+    "Matemática": [
+        {
+            id: 1,
+            titulo: "Álgebra Linear",
+            itens: [
+                { type: "file", id: 101, nome: "Lista de Exercícios 01.pdf", desc: "Exercícios de revisão", data: "20/10" },
+                { type: "link", id: 102, nome: "Vídeo Aula: Matrizes", desc: "YouTube", data: "21/10" }
+            ]
+        },
+        {
+            id: 2,
+            titulo: "Geometria Analítica",
+            itens: [
+                { type: "assignment", id: 201, nome: "Trabalho em Grupo", desc: "Entrega até 30/10", status: "Pendente" }
+            ]
+        }
+    ],
+    "História": [
+        {
+            id: 3,
+            titulo: "Segunda Guerra Mundial",
+            itens: [
+                { type: "file", id: 301, nome: "Resumo do Capítulo 4.pdf", desc: "Leitura obrigatória", data: "15/10" },
+                { type: "assignment", id: 302, nome: "Redação sobre o Dia D", desc: "Mínimo 30 linhas", status: "Entregue" }
+            ]
+        }
+    ]
+    // ... adicione mais se quiser
+};
+
+/**
+ * Retorna a lista de matérias disponíveis para o usuário.
+ */
+export async function getSubjectsList() {
+    await simulateNetworkDelay(200);
+    // Reaproveitando a lista do boletim ou criando uma nova
+    return Promise.resolve(Object.keys(_mockMateriasContent));
+}
+
+/**
+ * Retorna o conteúdo (módulos e arquivos) de uma matéria específica.
+ */
+export async function getSubjectContent(subjectName) {
+    await simulateNetworkDelay(300);
+    return Promise.resolve(_mockMateriasContent[subjectName] || []);
+}
+
+/**
+ * Simula o upload de um arquivo (Aluno enviando atividade).
+ */
+export async function uploadStudentAssignment(assignmentId, file) {
+    await simulateNetworkDelay(1000);
+    console.log(`Arquivo ${file.name} enviado para a atividade ${assignmentId}`);
+    return Promise.resolve(true);
+}
+
+/**
+ * Simula professor adicionando material (apenas log).
+ */
+export async function addMaterialToSubject(subjectName, materialData) {
+    await simulateNetworkDelay(500);
+    // Em um app real, daria push no array _mockMateriasContent
+    return Promise.resolve(true);
 }

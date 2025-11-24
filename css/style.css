@@ -990,3 +990,187 @@ canvas { width: 100% !important; height: 100% !important; }
          grid-template-rows: auto; /* Reseta as linhas */
     }
 }
+
+/* Layout da Página de Matérias */
+.materias-container {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 20px;
+    height: calc(100vh - 140px); /* Ajuste conforme altura do header */
+    margin-top: 20px;
+}
+
+/* Sidebar de Disciplinas */
+.materias-sidebar {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 15px;
+    overflow-y: auto;
+}
+
+.sidebar-title {
+    font-size: 1rem;
+    color: var(--icon-inactive);
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.disciplinas-nav {
+    list-style: none;
+    padding: 0;
+}
+
+.disciplina-item {
+    padding: 12px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.disciplina-item:hover {
+    background-color: var(--bg-hover);
+    color: var(--text-secondary);
+}
+
+.disciplina-item.active {
+    background-color: var(--brand-primary);
+    color: #fff;
+    font-weight: bold;
+}
+
+/* Área de Conteúdo */
+.materias-content {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 25px;
+    overflow-y: auto;
+}
+
+.content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 15px;
+}
+
+.teacher-controls {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-secondary {
+    padding: 10px 15px;
+    background-color: transparent;
+    border: 1px solid var(--brand-primary);
+    color: var(--brand-primary);
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* Módulos e Itens */
+.module-block {
+    margin-bottom: 30px;
+}
+
+.module-title {
+    font-size: 1.1rem;
+    color: var(--brand-primary);
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.resources-list {
+    list-style: none;
+    padding-left: 15px;
+    border-left: 2px solid var(--border-color);
+}
+
+.resource-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    margin-bottom: 10px;
+    border-radius: 6px;
+    transition: transform 0.2s;
+}
+
+.resource-item:hover {
+    transform: translateX(5px);
+    border-color: var(--brand-primary);
+}
+
+.resource-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.resource-icon {
+    font-size: 1.5rem;
+    color: var(--brand-primary);
+}
+
+.resource-meta {
+    display: flex;
+    flex-direction: column;
+}
+
+.resource-name {
+    font-weight: bold;
+    font-size: 0.95rem;
+}
+
+.resource-desc {
+    font-size: 0.8rem;
+    color: var(--icon-inactive);
+}
+
+.resource-actions button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: var(--icon-inactive);
+    margin-left: 10px;
+    transition: color 0.2s;
+}
+
+.resource-actions button:hover {
+    color: var(--brand-primary);
+}
+
+/* Badge de Status (Entregue/Pendente) */
+.status-badge {
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-left: 8px;
+}
+.badge-pendente { background-color: #f39c12; color: white; }
+.badge-entregue { background-color: #27ae60; color: white; }
+
+@media (max-width: 768px) {
+    .materias-container {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+    .materias-sidebar {
+        max-height: 200px;
+        margin-bottom: 20px;
+    }
+}

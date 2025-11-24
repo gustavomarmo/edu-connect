@@ -1,4 +1,4 @@
-// gustavomarmo/edu-connect/edu-connect-054a0530013bd5b510abada99aec7585770a74b4/script.js
+ 
 
 /**
  * ----------------------------------------------------------------
@@ -12,48 +12,38 @@
  * - Mantém o estado mínimo da aplicação (ex: 'currentUserRole', 'currentViewDate').
  */
 
-// --- 1. IMPORTAÇÕES ---
+// Importações
 import * as api from './apiService.js';
 import * as ui from './uiManager.js';
-
-// --- 2. ESTADO DA APLICAÇÃO E AUTENTICAÇÃO ---
 
 const currentUserRole = localStorage.getItem('userRole');
 if (!currentUserRole) {
     window.location.href = 'login.html';
 }
 
-// Elementos globais para listeners
 const toggleButton = document.getElementById('toggle-btn');
 const sidebar = document.querySelector('.sidebar');
 const sunBtn = document.getElementById('theme-sun');
 const moonBtn = document.getElementById('theme-moon');
 const body = document.body;
 
-// Mantém o estado de qual mês o calendário está vendo
 let currentViewDate = new Date();
 
-
-// --- 3. INICIALIZAÇÃO DA APLICAÇÃO ---
-
-/**
- * Ocorre quando o DOM está pronto. Ponto de entrada principal.
- */
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Configura a UI inicial (tema e sidebar)
+     
     ui.applySavedTheme();
     ui.setupSidebar(currentUserRole);
     
-    // 2. Configura os "ouvintes" de eventos globais
+     
     setupGlobalEventListeners();
     
-    // 3. Carrega a página inicial (dashboard)
+     
     const initialPageUrl = document.querySelector('#nav-dashboard a').getAttribute('href');
     loadPage(initialPageUrl);
 });
 
 
-// --- 4. CARREGADOR DE PÁGINA (O ORQUESTRADOR) ---
+ 
 
 /**
  * Carrega o HTML de uma sub-página, injeta no #page-content
@@ -64,24 +54,15 @@ async function loadPage(url) {
     try {
         const response = await fetch(url);
         
-        // Se a dashboard específica (ex: -aluno) não existir, tenta carregar uma genérica
         if (!response.ok && url.includes('dashboard-')) {
-            // Nota: O seu projeto original não tem um "dashboard.html" genérico,
-            // mas esta é uma boa prática de fallback.
-            // Por enquanto, vamos apenas tratar como 404.
             throw new Error(`Página não encontrada: ${response.status}`);
         }
         
         const content = await response.text();
         document.getElementById('page-content').innerHTML = content;
 
-        // Aplica permissões (read-only) ANTES de carregar os dados
         ui.applyPagePermissions(currentUserRole, url);
 
-        // --- MÁGICA DA ORQUESTRAÇÃO ---
-        // Após o HTML carregar, chama a função "controladora"
-        // para buscar dados da API e renderizar no UI.
-        
         if (url.includes('calendario.html')) {
             await initializeCalendarPage();
         } else if (url.includes('alunos.html')) {
@@ -94,8 +75,9 @@ async function loadPage(url) {
             await initializeProfessorDashboard();
         } else if (url.includes('dashboard-coordenador.html')) {
             await initializeCoordenadorDashboard();
+        } else if (url.includes('materias.html')) {
+            await initializeMateriasPage();
         }
-        // Nenhuma ação de inicialização necessária para 'dashboard-aluno.html'
 
     } catch (error) {
         console.error("Erro ao carregar a página:", error);
@@ -103,27 +85,20 @@ async function loadPage(url) {
     }
 }
 
-
-// --- 5. FUNÇÕES CONTROLADORAS (POR PÁGINA) ---
-// Cada função é responsável por "montar" uma página.
-
 async function initializeCalendarPage() {
     try {
-        // 1. Busca dados
         const events = await api.getCalendarEvents();
-        // 2. Renderiza UI
         ui.renderCalendar(currentViewDate, events);
     } catch (e) { 
         console.error("Erro ao inicializar calendário:", e); 
-        // Aqui você poderia chamar ui.showError("Falha ao carregar eventos.")
     }
 }
 
 async function initializeAlunosPage(filter = '') {
     try {
-        // 1. Busca dados (com filtro, se houver)
+         
         const students = await api.getStudents(filter);
-        // 2. Renderiza UI
+         
         ui.renderStudentTable(students);
     } catch (e) { 
         console.error("Erro ao inicializar alunos:", e); 
@@ -132,9 +107,9 @@ async function initializeAlunosPage(filter = '') {
 
 async function initializeProfessoresPage(filter = '') {
     try {
-        // 1. Busca dados
+         
         const teachers = await api.getTeachers(filter);
-        // 2. Renderiza UI
+         
         ui.renderTeacherTable(teachers);
     } catch (e) { 
         console.error("Erro ao inicializar professores:", e); 
@@ -143,19 +118,19 @@ async function initializeProfessoresPage(filter = '') {
 
 async function initializeDesempenhoPage() {
     try {
-        // 1. Busca dados (em paralelo para performance)
+         
         const [boletimData, absenceData, subjects] = await Promise.all([
             api.getBoletimData(),
             api.getAbsenceData(),
             api.getAvailableSubjects()
         ]);
         
-        // 2. Renderiza UI
+         
         ui.renderBoletimTable(boletimData);
         ui.renderAbsenceTable(absenceData);
         ui.populateSubjectSelect(subjects);
         
-        // 3. Renderiza o gráfico com a primeira matéria da lista
+         
         if (subjects.length > 0) {
             await updateEvolutionChart(subjects[0]);
         }
@@ -167,9 +142,9 @@ async function initializeDesempenhoPage() {
 /** Função separada para o gráfico, pois ele muda com 'input' */
 async function updateEvolutionChart(subject) {
      try {
-        // 1. Busca dados
+         
         const chartData = await api.getSubjectEvolutionData(subject);
-        // 2. Renderiza UI
+         
         ui.renderEvolutionChart(chartData.labels, chartData.data);
      } catch (e) { 
          console.error("Erro ao atualizar gráfico:", e); 
@@ -178,9 +153,9 @@ async function updateEvolutionChart(subject) {
 
 async function initializeProfessorDashboard() {
     try {
-        // 1. Busca dados
+         
         const data = await api.getProfessorDashboardData();
-        // 2. Renderiza UI
+         
         ui.renderProfessorDashboard(data.kpis, data.alunosAtencao);
     } catch (e) { 
         console.error("Erro ao inicializar dashboard do professor:", e); 
@@ -189,9 +164,9 @@ async function initializeProfessorDashboard() {
 
 async function initializeCoordenadorDashboard() {
     try {
-        // 1. Busca dados
+         
         const data = await api.getCoordenadorDashboardData();
-        // 2. Renderiza UI (em partes)
+         
         ui.renderCoordenadorKPIs(data.kpis);
         ui.renderCoordenadorBarChart(data.barChartData);
         ui.renderCoordenadorPieChart(data.pieChartData);
@@ -201,12 +176,32 @@ async function initializeCoordenadorDashboard() {
     }
 }
 
+async function initializeMateriasPage() {
+    try {
+        const subjects = await api.getSubjectsList();
+        
+         
+        const onSubjectSelect = async (subjectName) => {
+             
+            const content = await api.getSubjectContent(subjectName);
+             
+            ui.renderSubjectContent(subjectName, content, currentUserRole);
+        };
 
-// --- 6. GERENCIAMENTO DE EVENTOS GLOBAIS ---
+         
+        ui.renderMateriasSidebar(subjects, onSubjectSelect);
+        
+         
+        if (subjects.length > 0) {
+            onSubjectSelect(subjects[0]);
+        }
+
+    } catch (e) {
+        console.error("Erro ao carregar matérias:", e);
+    }
+}
 
 function setupGlobalEventListeners() {
-    
-    // --- Listeners da "Casca" (Sidebar, Tema, Logout) ---
     
     toggleButton.addEventListener('click', () => {
         sidebar.classList.toggle('collapsed');
@@ -228,14 +223,13 @@ function setupGlobalEventListeners() {
     
     document.getElementById('logout-btn').addEventListener('click', (event) => {
         event.preventDefault();
-        // Limpa tudo
+         
         localStorage.removeItem('userRole');
         localStorage.removeItem('theme');
         localStorage.removeItem('calendarEvents'); 
         window.location.href = 'login.html';
     });
-
-    // --- Listener para links da Sidebar ---
+     
     document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', (event) => {
             event.preventDefault(); 
@@ -246,14 +240,12 @@ function setupGlobalEventListeners() {
         });
     });
 
-    // --- Delegação de Eventos no #main-content (Onde as páginas são carregadas) ---
     const mainContent = document.getElementById('main-content');
 
-    // --- 1. OUVINTE DE CLIQUES ---
     mainContent.addEventListener('click', async (event) => {
-        const target = event.target; // O elemento exato que foi clicado
+        const target = event.target;  
 
-        // Links de navegação DENTRO do #page-content (Ex: Acesso Rápido do Dashboard)
+         
         const navLink = target.closest('.nav-link');
         if (navLink) {
             event.preventDefault();
@@ -263,11 +255,9 @@ function setupGlobalEventListeners() {
             }
             return; 
         }
-        
-        // --- Calendário ---
         if (target.closest('#next-month')) {
             currentViewDate.setMonth(currentViewDate.getMonth() + 1);
-            await initializeCalendarPage(); // Re-renderiza o calendário
+            await initializeCalendarPage();  
             return; 
         }
         if (target.closest('#prev-month')) {
@@ -277,7 +267,7 @@ function setupGlobalEventListeners() {
         }
         const dayCell = target.closest('.calendar-day[data-date]');
         if (dayCell) {
-            // Se a página for read-only (definido pelo ui.applyPagePermissions), não faz nada
+             
             if (document.getElementById('page-content').classList.contains('read-only')) return;
             
             ui.openEventModal(dayCell.dataset.date);
@@ -288,7 +278,6 @@ function setupGlobalEventListeners() {
             return; 
         }
 
-        // --- Tabelas (Editar, Deletar, Adicionar) ---
         const editLink = target.closest('.action-edit[data-id]');
         if (editLink) {
             event.preventDefault(); 
@@ -303,11 +292,11 @@ function setupGlobalEventListeners() {
 
             try {
                 if (deleteBtn.closest('#student-table')) {
-                    await api.deleteStudent(id);      // Chama API
-                    await initializeAlunosPage();   // Recarrega
+                    await api.deleteStudent(id);       
+                    await initializeAlunosPage();    
                 } else if (deleteBtn.closest('#teacher-table')) {
-                    await api.deleteTeacher(id);      // Chama API
-                    await initializeProfessoresPage(); // Recarrega
+                    await api.deleteTeacher(id);       
+                    await initializeProfessoresPage();  
                 }
             } catch (err) {
                 console.error("Erro ao deletar:", err);
@@ -326,13 +315,31 @@ function setupGlobalEventListeners() {
             ui.showForm('form-novo-professor');
             return; 
         }
+
+        const uploadBtn = target.closest('.btn-upload-trigger');
+        if (uploadBtn) {
+            const taskName = uploadBtn.dataset.name;
+            const taskId = uploadBtn.dataset.id;  
+            
+            document.getElementById('upload-task-name').innerText = taskName;
+            document.getElementById('upload-modal').style.display = 'flex';
+            return;
+        }
+         
+        if (target.closest('#btn-novo-topico')) {
+            alert("Funcionalidade de Criar Tópico (Exclusiva do Professor)");
+            return;
+        }
+        if (target.closest('#btn-novo-material')) {
+            alert("Funcionalidade de Adicionar Material (Exclusiva do Professor)");
+            return;
+        }
     });
 
-    // --- 2. OUVINTE DE SUBMISSÕES DE FORMULÁRIO ---
+     
     mainContent.addEventListener('submit', async (event) => {
-        event.preventDefault(); // Previne o recarregamento da página
-        
-        // Form: Modal de Evento do Calendário
+        event.preventDefault();  
+         
         if (event.target.id === 'event-form') {
             const { date, title } = ui.getEventModalData();
             if (!title) {
@@ -342,14 +349,13 @@ function setupGlobalEventListeners() {
             try {
                 await api.saveCalendarEvent(date, title);
                 ui.closeEventModal();
-                await initializeCalendarPage(); // Recarrega o calendário
+                await initializeCalendarPage();  
             } catch(e) {
                 alert("Falha ao salvar evento.");
             }
             return; 
         }
 
-        // Form: Novo Aluno
         if (event.target.id === 'aluno-form') {
             const studentData = ui.getStudentFormData();
             if (!studentData) {
@@ -358,7 +364,7 @@ function setupGlobalEventListeners() {
             }
             try {
                 await api.addStudent(studentData);
-                await initializeAlunosPage(); // Recarrega a tabela
+                await initializeAlunosPage();  
                 ui.clearAndFocusForm('aluno-form', 'aluno-matricula');
             } catch (e) {
                 alert("Falha ao salvar aluno.");
@@ -366,7 +372,6 @@ function setupGlobalEventListeners() {
             return; 
         }
 
-        // Form: Novo Professor
         if (event.target.id === 'professor-form') {
             const teacherData = ui.getTeacherFormData();
              if (!teacherData) {
@@ -375,31 +380,40 @@ function setupGlobalEventListeners() {
             }
             try {
                 await api.addTeacher(teacherData);
-                await initializeProfessoresPage(); // Recarrega a tabela
+                await initializeProfessoresPage();  
                 ui.clearAndFocusForm('professor-form', 'prof-matricula');
             } catch (e) {
                 alert("Falha ao salvar professor.");
             }
             return; 
         }
+
+        if (event.target.id === 'form-upload-atividade') {
+            const fileInput = document.getElementById('file-upload');
+            if (fileInput.files.length > 0) {
+                 
+                alert(`Arquivo "${fileInput.files[0].name}" enviado com sucesso!`);
+                document.getElementById('upload-modal').style.display = 'none';
+                 
+            }
+            return;
+        }
     });
     
-    // --- 3. OUVINTE DE INPUTS (Filtros e Gráficos) ---
     mainContent.addEventListener('input', (event) => {
         const target = event.target;
-        
-        // Filtro de Alunos
+         
         if (target.id === 'student-search-input') {
-            // Re-inicializa a página de alunos com o filtro
+             
             initializeAlunosPage(target.value);
         }
         
-        // Filtro de Professores
+         
         else if (target.id === 'teacher-search-input') {
             initializeProfessoresPage(target.value);
         }
         
-        // Select de Matéria (Gráfico de Desempenho)
+         
         else if (target.id === 'subject-select') {
             updateEvolutionChart(target.value);
         }

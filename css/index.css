@@ -1,0 +1,198 @@
+/* Importação das fontes do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+/* Reset Básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto Slab', serif;
+}
+
+/* Tema Claro - Normal */
+:root {
+
+    /* Cores Gerais */
+    --fundo-primario: #f4f7f6;
+    --fundo-secundario: #2c3e50;
+    --texto-primario: #333;
+    --texto-secundario: #ffffff;
+    --fundo-hover: #34495e;
+    --cor-borda: #34495e;
+
+    /* Cores dos Ícones */
+    --icone-ativo: #a0a0a0;
+    --icone-inativo: #2c3e50;
+}
+
+/* Tema Escuro - Quando o elemento body tiver a classe dark-mode */
+body.modo-escuro {
+    
+    /* Cores Gerais */
+    --fundo-primario: #1e1e1e;
+    --fundo-secundario: #252526;
+    --texto-primario: #d4d4d4;
+    --texto-secundario: #d4d4d4;
+    --fundo-hover: #3a3a3a;
+    --cor-borda: #3a3a3a;
+
+    /* Cores dos Ícones */
+    --icone-ativo: #a0a0a0;
+}
+
+body {
+    display: flex;
+    background-color: var(--fundo-primario);
+    color: var(--texto-primario);
+    transition: background-color 1s ease, color 1s ease;
+}
+
+.menu-lateral {
+
+    width: 250px;
+    height: 100vh;
+    position: sticky; /* Garante que ficará grudada o site inteiro */
+    top: 0;
+    overflow: hidden; /* Garante que o texto vai sumir quando fecharmos */
+    display: flex; /* Garante flexibilidade */
+    flex-direction: column; /* Garante que os itens fiquem em coluna */
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+
+    background-color: var(--fundo-secundario); /* Para dar destaque */
+    color: var(--texto-secundario); /* Para dar destaque */
+
+    transition: width 1s ease, background-color 1s ease; /* Para quando expandirmos a largura ou trocarmos de tema */
+
+}
+
+.menu-lateral-cabecalho {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+}
+
+.botao-expandir {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--texto-secundario);
+    padding: 10px;
+}
+
+.perfil-usuario {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border-top: 1px solid var(--cor-borda);
+    border-bottom: 1px solid var(--cor-borda);
+}
+
+.foto-usuario {
+    width: 40px;
+    height: 60px;
+    border-radius: 20%;
+    margin-right: 15px;
+    transition: margin 1s ease; /* Transição Quando Expandido */
+}
+
+.nome-usuario {
+    font-weight: bold; /* Deixar o nome da pessoa em negrito */
+}
+
+.menu-links {
+    list-style: none; /* Tirar o estilo de listagem */
+    flex-grow: 1;
+}
+
+.menu-links li a,
+.secao-logout a {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    text-decoration: none;
+    white-space: nowrap;
+
+    color: var(--texto-secundario);
+    transition: background-color 1s; /* Transição para quando alterar o tema */
+}
+
+.menu-links li a:hover {
+    background-color: var(--fundo-hover); /* Alterar cor quando passar o mouse em cima */
+}
+
+.menu-links li a i,
+.secao-logout a i {
+    font-size: 1.2rem;
+    margin-right: 15px;
+    width: 40px;
+    text-align: center;
+    transition: margin 1s ease; /* Quando abrir ou fechar o menu lateral */
+}
+
+.secao-logout {
+    border-top: 1px solid var(--cor-borda);
+    padding: 10px;
+}
+
+.conteudo-principal {
+    flex-grow: 1;
+    padding: 20px;
+    position: relative; /* Permite ajustar a posição com propriedades top, bottom, left, right */
+    transition: background-color 1s ease, color 1s ease; /* Transições para quando alterar o tema */
+}
+
+/* Estilizar botões de Tema */
+.botao-troca-tema {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    background-color: var(--fundo-hover);
+    border-radius: 20px;
+    padding: 5px;
+}
+
+.botao-tema {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 5px 8px;
+    border-radius: 50%;
+    
+    color: var(--icone-inativo);
+    transition: color 1s ease, background-color 1s ease;
+}
+
+.botao-tema.ativo{
+    color: var(--icone-ativo);
+    background-color: rgba(0,0,0,0.1);
+}
+
+.menu-lateral.encolhido {
+    width: 80px;
+}
+
+/* Some com os textos do menu lateral */
+.menu-lateral.encolhido .texto-link {
+    display: none;
+}
+
+.menu-lateral.encolhido .perfil-usuario {
+    justify-content: center; /* Centraliza a foto da pessoa */
+}
+
+.menu-lateral.encolhido .foto-usuario {
+    margin-right: 0;
+}
+
+.menu-lateral.encolhido .menu-links li a i,
+.menu-lateral.encolhido .secao-logout a i{
+    margin-right: 0;
+}
+
+.menu-lateral.encolhido .menu-lateral-cabecalho {
+    justify-content: center;
+}
